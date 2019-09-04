@@ -2,7 +2,9 @@
 using namespace std;
 
 const char DIR_T[6]  = {'U', 'D', 'F', 'B', 'L', 'R'};
+// 0~5를 방향 문자로 바꿈
 const char COLOR[6] = {'w', 'y', 'r', 'o', 'g', 'b'};
+// 0~5를 색 문자로 바꿈
 const int DIR[6][8] = {
         { 0,  2,  4,  6,  1,  3,  5,  7},
         {18, 16, 14, 12, 17, 15, 13, 19},
@@ -11,6 +13,9 @@ const int DIR[6][8] = {
         { 0,  6, 18, 12,  7, 11, 19,  8},
         { 4,  2, 14, 16,  3,  9, 15, 10}
     };
+//큐브 회전관련
+//열: 방향벡터, 행: 돌아가는 큐브 번호들
+//0~3행 모서리 큐브, 4~7행 변 큐브
 const int DICE[6][4] = {
         {2, 4, 3, 5},
         {2, 5, 3, 4},
@@ -19,6 +24,8 @@ const int DICE[6][4] = {
         {0, 2, 1, 3},
         {0, 3, 1, 2}
     };
+//정육면체 회전관련
+//열: 방향벡터, 행: 돌아가는 면 번호
 
 struct Cube{
     char face[6];
@@ -53,6 +60,8 @@ struct Cubing{
     };
     void spin(int dir_number, int is_clockwise){
         if(is_clockwise){
+            // 대각선큐브와 변 큐브 나누어서 회전
+            // 대각선큐브와 변 큐브 나누어서 회전
             Cube *temp1 = cu[DIR[dir_number][3]];
             for(int i=3; i>0; i--)
                 cu[DIR[dir_number][i]] = cu[DIR[dir_number][i-1]];
@@ -64,6 +73,8 @@ struct Cubing{
             for(int i : DIR[dir_number])
                 cu[i]->spin(dir_number, is_clockwise);
         }else {
+            // 대각선큐브와 변 큐브 나누어서 회전
+            // 대각선큐브와 변 큐브 나누어서 회전
             Cube *temp1 = cu[DIR[dir_number][0]];
             for(int i=0; i<3; i++)
                 cu[DIR[dir_number][i]] = cu[DIR[dir_number][i+1]];
