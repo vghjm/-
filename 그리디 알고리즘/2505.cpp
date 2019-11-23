@@ -23,12 +23,14 @@ int main() {
     int n;
     scanf("%d", &n);
     v[0].resize(n+1); v[1].resize(n+1);
+    // 입력 벡터 2개 준비
     for(int i=1; i<=n; i++){
         int t;
         scanf("%d", &t);
         v[0][i] = v[1][i] = t;
     }
     
+    //1차 탐색, 왼쪽부터 부족한 작은 수를 채움
     int count=0;
     vector<pair<int, int>> ans;
     for(int i=1; i<=n; i++){
@@ -42,6 +44,7 @@ int main() {
         if(count>2) break;
     }
     
+    //정답이 아닌경우, 2차 탐색, 오른쪽부터 부족한 큰 수를 채움
     if(count>2){
         count = 0;
         ans.clear();
@@ -57,6 +60,7 @@ int main() {
         }
     }
     
+    //정답 출력
     if(count==2){
         printf("%d %d\n", ans[0].first, ans[0].second);
         printf("%d %d", ans[1].first, ans[1].second);
